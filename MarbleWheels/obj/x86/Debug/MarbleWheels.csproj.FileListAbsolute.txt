@@ -1,3 +1,10 @@
+D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\ammo\marbleBulletBasic.png
+D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\ammo\marbleBulletMedium.png
+D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\background\background.jpg
+D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\character\marbleWheels.png
+D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\health\healthBar.png
+D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\obstacles\arrow.png
+D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\obstacles\hammer.png
 D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\MarbleWheels.exe
 D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\MarbleWheels.pdb
 D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\MonoGame.Framework.dll
@@ -22,11 +29,7 @@ D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\SharpDX.RawInput.xml
 D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\SharpDX.Direct3D9.xml
 D:\Github\MarbleWheels\MarbleWheels\obj\x86\Debug\MarbleWheels.exe
 D:\Github\MarbleWheels\MarbleWheels\obj\x86\Debug\MarbleWheels.pdb
-D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\ammo\marbleBulletBasic.png
-D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\ammo\marbleBulletMedium.png
-D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\background\background.jpg
-D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\character\marbleWheels.png
-D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\health\healthBar.png
-D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\obstacles\arrow.png
-D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\obstacles\hammer.png
-D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\soundFX\shootSoundFX.xnb
+D:\Github\MarbleWheels\MarbleWheels\obj\x86\Debug\MarbleWheels.csprojResolveAssemblyReference.cache
+D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sound\shootSoundFx.mp3
+D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sound\shootSoundFx.wma
+D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sound\shootSoundFx.xnb

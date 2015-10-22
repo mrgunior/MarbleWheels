@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>D:/Github/MarbleWheels/MarbleWheels/Content/sound/shootSoundFx.mp3</SourceFile>
+  <SourceTime>2015-10-22T23:07:30.4127923+02:00</SourceTime>
+  <DestFile>D:/Github/MarbleWheels/MarbleWheels/Content/bin/Windows/sound/shootSoundFx.xnb</DestFile>
+  <DestTime>2015-10-22T23:25:33.5381487+02:00</DestTime>
+  <Importer>Mp3Importer</Importer>
+  <ImporterTime>2015-04-29T19:14:44+02:00</ImporterTime>
+  <Processor>SongProcessor</Processor>
+  <ProcessorTime>2015-04-29T19:14:44+02:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput>
+    <string>D:/Github/MarbleWheels/MarbleWheels/Content/bin/Windows/sound/shootSoundFx.wma</string>
+  </BuildOutput>
+</PipelineBuildEvent>

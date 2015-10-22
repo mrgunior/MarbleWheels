@@ -61,7 +61,7 @@ namespace MarbleWheels
             background = Content.Load<Texture2D>("sprites/background/background.jpg");
             fallingObstacles = Content.Load<Texture2D>("sprites/Obstacles/hammer.png");
             marbleAmmo = Content.Load<Texture2D>("sprites/ammo/marbleBulletBasic.png");
-            shootSoundFX = Content.Load<Song>(@"soundFX/shootSoundFX");
+            shootSoundFX = Content.Load<Song>(@"sound/shootSoundFX");
         }
 
         /**
@@ -92,7 +92,7 @@ namespace MarbleWheels
                       marbleAmmoPosition.Y < 600.0f &&
                       colliders.Count() == 0
 
-                select marbleAmmoPosition - Vector2.UnitY * 200.0f * deltaTime).ToList();
+                select marbleAmmoPosition - Vector2.UnitY * 500.0f * deltaTime).ToList();
 
             // Is the SPACE key down?
             if (newState.IsKeyDown(Keys.Space))
