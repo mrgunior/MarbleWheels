@@ -14,10 +14,14 @@ namespace MarbleWheels
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private Song shootSoundFX;
+        private SpriteFont headerFont;
+        private int ammoCount = 100;
 
-        private Vector2 marbleWheelsPosition, jumpHeight, jumpSpeed;
+        private Vector2 marbleWheelsPosition, jumpHeight, jumpSpeed, 
+                        ammoSackBarPosition, healthBarPosition, scoreBarPosition;
         private Vector2 spriteDirection = Vector2.Zero;
-        private Texture2D marbleWheels, background, fallingObstacles, marbleAmmo;
+        private Texture2D marbleWheels, background, fallingObstacles, 
+                          marbleAmmo, ammoSackBar, healthBar, scoreBar;
         private int gameLogicScriptPC = 0, rndNumberLine1, iLine1, rndNumberLine5, iLine5;
         private float speed, timeToWaitLine3, timeToWaitLine4, timeToWaitLine8, timeToWaitLine7;
 
@@ -57,10 +61,18 @@ namespace MarbleWheels
 
             //Positions of the objects
             marbleWheelsPosition = new Vector2(100, 350);
+            ammoSackBarPosition = new Vector2(680, 10);
+            healthBarPosition = new Vector2(560, 10);
+            scoreBarPosition = new Vector2(40, 10);
+ 
             marbleWheels = Content.Load<Texture2D>("sprites/character/marbleWheels.png");
             background = Content.Load<Texture2D>("sprites/background/background.jpg");
             fallingObstacles = Content.Load<Texture2D>("sprites/Obstacles/hammer.png");
             marbleAmmo = Content.Load<Texture2D>("sprites/ammo/marbleBulletBasic.png");
+            ammoSackBar = Content.Load<Texture2D>("sprites/ammo/ammoSackBar.png");
+            healthBar = Content.Load<Texture2D>("sprites/health/healthBar.png");
+            scoreBar = Content.Load<Texture2D>("sprites/scoreBar/scoreBar.png");
+            headerFont = Content.Load<SpriteFont>("headerFont");
             shootSoundFX = Content.Load<Song>(@"sound/shootSoundFX");
         }
 
@@ -102,6 +114,7 @@ namespace MarbleWheels
                 {
                     MediaPlayer.Play(shootSoundFX);
 
+                    ammoCount--;
                     newMarbleAmmoPositions.Add(marbleWheelsPosition);
                 }
             }
@@ -282,6 +295,11 @@ namespace MarbleWheels
             spriteBatch.Begin();
             spriteBatch.Draw(background, new Rectangle(0, 0, 800, 480), Color.White);
             spriteBatch.Draw(marbleWheels, marbleWheelsPosition, Color.White);
+            spriteBatch.Draw(ammoSackBar, ammoSackBarPosition, Color.White);
+            spriteBatch.Draw(healthBar, healthBarPosition, Color.White);
+            spriteBatch.Draw(scoreBar, scoreBarPosition, Color.White);
+            spriteBatch.DrawString(headerFont, "" + ammoCount, new Vector2(740, 35), Color.Black);
+            spriteBatch.DrawString(headerFont, "%", new Vector2(640, 35), Color.Black);
 
             foreach (var marbleAmmoPosition in marbleAmmoPositions)
             {

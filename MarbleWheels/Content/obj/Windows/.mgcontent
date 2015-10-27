@@ -4,6 +4,6 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/Github/MarbleWheels/MarbleWheels/Content/sound/shootSoundFx.mp3</File>
+    <File>D:/Github/MarbleWheels/MarbleWheels/Content/headerFont.spritefont</File>
   </SourceFiles>
 </SourceFileCollection>

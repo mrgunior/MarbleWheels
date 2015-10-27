@@ -14,7 +14,7 @@ interface ControllerManagement
     void Update(float deltaTime);
 }
 
-class KeyboardController : InputController
+class KeyboardController : ControllerManagement
 {
     KeyboardState ks;
 
@@ -57,7 +57,7 @@ class KeyboardController : InputController
     }
 }
 
-class MouseController : InputController
+class MouseController : ControllerManagement
 {
     MouseState ms;
 
@@ -91,10 +91,10 @@ class MouseController : InputController
     }
 }
 
-class ControllerSum : InputController
+class ControllerSum : ControllerManagement
 {
-    InputController first, second;
-    public ControllerSum(InputController a, InputController b)
+    ControllerManagement first, second;
+    public ControllerSum(ControllerManagement a, ControllerManagement b)
     {
         first = a;
         second = b;
