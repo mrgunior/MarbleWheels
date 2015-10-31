@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,12 @@ namespace MarbleWheels
         {
             get;
         }
+
+        Vector2 marbleWheelsControl(KeyboardState KeyState);
+
         Vector2 marbleWheelsMovement();
+
+        int currentWeaponSelection();
 
         bool shootMarbleAmmo
         {

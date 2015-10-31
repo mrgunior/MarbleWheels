@@ -102,6 +102,9 @@ namespace MarbleWheels
             //Movement in frames. This is not hardware dependent but frame dependent. 
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            //Constantly send current input
+            keyboardInput.marbleWheelsControl(Keyboard.GetState());
+
             spriteDirection = Vector2.Zero; //reset the value. This makes sure the player waits on input instead continueing on the pressed button.
             spriteDirection = keyboardInput.marbleWheelsMovement();  //update to last current position
             marbleWheelsPosition += spriteDirection * speed * deltaTime;  //update it to currrent position

@@ -1,5 +1,3 @@
-D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\ammo\marbleBulletBasic.png
-D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\ammo\marbleBulletMedium.png
 D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\background\background.jpg
 D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\character\marbleWheels.png
 D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\health\healthBar.png
@@ -30,7 +28,6 @@ D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\SharpDX.Direct3D9.xml
 D:\Github\MarbleWheels\MarbleWheels\obj\x86\Debug\MarbleWheels.exe
 D:\Github\MarbleWheels\MarbleWheels\obj\x86\Debug\MarbleWheels.pdb
 D:\Github\MarbleWheels\MarbleWheels\obj\x86\Debug\MarbleWheels.csprojResolveAssemblyReference.cache
-D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sound\shootSoundFx.mp3
 D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\ammo\ammoSackBar.png
 D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\headerFont.spritefont
 D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\ammoCount.xnb
@@ -115,3 +112,5 @@ C:\Users\nichelle\Documents\GitHub\MarbleWheels\MarbleWheels\bin\Windows\Debug\S
 C:\Users\nichelle\Documents\GitHub\MarbleWheels\MarbleWheels\bin\Windows\Debug\SharpDX.Direct3D9.xml
 C:\Users\nichelle\Documents\GitHub\MarbleWheels\MarbleWheels\obj\x86\Debug\MarbleWheels.exe
 C:\Users\nichelle\Documents\GitHub\MarbleWheels\MarbleWheels\obj\x86\Debug\MarbleWheels.pdb
+D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\ammo\basicMarbleAmmo.png
+D:\Github\MarbleWheels\MarbleWheels\bin\Windows\Debug\Content\sprites\ammo\mediumMarbleAmmo.png
