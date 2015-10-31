@@ -38,6 +38,8 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="InputController.cs" />
+    <Compile Include="KeyboardController.cs" />
     <Compile Include="MarbleAmmo.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="MediumMarbleAmmo.cs" />

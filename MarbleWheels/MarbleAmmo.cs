@@ -11,12 +11,17 @@ namespace MarbleWheels
     abstract class MarbleAmmo : Weapon<Entity>
     {
         protected List<Entity> ammoSack = new List<Entity>();
-
+        protected int ammoCount;
         protected ContentManager Content;
         public MarbleAmmo(ContentManager content)
         {
             Content = content;
 
+        }
+
+        public int ammoAmountToTakeOff()
+        {
+            return ammoCount;
         }
 
         public List<Entity> newAmmo()

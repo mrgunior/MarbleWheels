@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Content;
 namespace MarbleWheels
 {
     class BasicMarbleAmmo : MarbleAmmo
-    {
+    { 
         public BasicMarbleAmmo(ContentManager content) : base(content) 
         {
 
@@ -19,6 +19,7 @@ namespace MarbleWheels
 
         protected override void addMarbleShots()
         {
+            ammoCount = 1;
             Entity ammo = new Entity(marbleAmmoAppearance);
             ammo.position = marbleWheelsPosition;
             ammoSack.Add(ammo);

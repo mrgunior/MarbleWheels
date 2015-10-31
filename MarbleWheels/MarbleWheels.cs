@@ -14,12 +14,11 @@ namespace MarbleWheels
         private SpriteFont headerFont;
         private Song shootSoundFX;
 
-        private Vector2 marbleWheelsPosition, 
-                        ammoSackBarPosition, 
-                        healthBarPosition, 
-                        scoreBarPosition, 
-                        spriteDirection,  
-                        topEnemySpawner;
+        private Vector2 marbleWheelsPosition,
+                        ammoSackBarPosition,
+                        healthBarPosition,
+                        scoreBarPosition,
+                        spriteDirection;
 
         private Texture2D marbleWheels, 
                           background, 
@@ -30,19 +29,18 @@ namespace MarbleWheels
                           healthBar, 
                           scoreBar;
 
-        private int gameLogicScriptPC = 0, rndNumberLine1, iLine1, rndNumberLine5, iLine5, ammoCount = 500;
+        private int gameLogicScriptPC = 0, rndNumberLine1, iLine1, rndNumberLine5, iLine5, ammoAmount = 500, index;
         private float speed, timeToWaitLine3, timeToWaitLine4, timeToWaitLine8, timeToWaitLine7, deltaTime;
 
         private Random randomGenerator = new Random();
         private List<Entity> enemyObjects = new List<Entity>();
         private List<Entity> ammo = new List<Entity>();
         private List<Weapon<Entity>> weaponList;
+        private KeyboardController keyboardInput = new KeyboardController();
+        private List<Texture2D> textureList;
 
-        private KeyboardState oldState;
-        private int score = 0;
-        private int marbleDamage = 100;
+        private int score = 0, marbleDamage = 100;
         private bool takeOut;
-        private bool mediumAmmoSelected;
 
         /**
         *
@@ -90,8 +88,9 @@ namespace MarbleWheels
             shootSoundFX = Content.Load<Song>(@"sound/shootSoundFX");
             headerFont = Content.Load<SpriteFont>("headerFont");
 
-            //Create weaponList component
+            //Create weaponList component 
             weaponList = new List<Weapon<Entity>> { new BasicMarbleAmmo(Content), new MediumMarbleAmmo(Content) };
+            textureList = new List<Texture2D> { bma, mma};
         }
 
         /**
@@ -100,15 +99,24 @@ namespace MarbleWheels
         */
         protected override void Update(GameTime gameTime)
         {
-
-            //Movement in frames. This is not hardware depended but frame depended. 
+            //Movement in frames. This is not hardware dependent but frame dependent. 
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            //reset the value. This makes sure the player waits on input instead continueing on the pressed button.
-            spriteDirection = Vector2.Zero;
+            spriteDirection = Vector2.Zero; //reset the value. This makes sure the player waits on input instead continueing on the pressed button.
+            spriteDirection = keyboardInput.marbleWheelsMovement();  //update to last current position
+            marbleWheelsPosition += spriteDirection * speed * deltaTime;  //update it to currrent position
+     
+            if(keyboardInput.shootMarbleAmmo)
+            {
+                //update which ammo has been selected
+                index = keyboardInput.currentWeaponSelection();
 
-            //handle the keyboard inputs
-            HandleKeyboardInput(Keyboard.GetState());
+                //The first thing that happens = we need to update the object with the current information
+                weaponList[index].Update(deltaTime, marbleWheelsPosition, textureList[index]);
+                weaponList[index].shootMarble();
+                ammo = weaponList[index].newAmmo();
+                ammoAmount -= weaponList[index].ammoAmountToTakeOff();
+            }
 
             //Spawn them
             spawnEnemyObject();
@@ -249,71 +257,6 @@ namespace MarbleWheels
         *
         *
         */
-        protected void HandleKeyboardInput(KeyboardState KeyState)
-        {
-            //exit the game if the ESC button is pressed
-            if (KeyState.IsKeyDown(Keys.Escape))
-            {
-                Exit();
-            }
-
-            //move the player right if the right button is pressed.
-            if (KeyState.IsKeyDown(Keys.Right))
-            {
-                spriteDirection += new Vector2(1, 0);
-            }
-
-            //player goes left if the left button is pressed
-            if (KeyState.IsKeyDown(Keys.Left))
-            {
-                spriteDirection += new Vector2(-1, 0);
-            }
-
-            if(KeyState.IsKeyDown(Keys.NumPad1))
-            {
-                mediumAmmoSelected = true;
-            }
-
-            if (KeyState.IsKeyDown(Keys.NumPad2))
-            {
-                mediumAmmoSelected = false;
-            }
-            // Is the SPACE key down?
-            if (KeyState.IsKeyDown(Keys.Space))
-            {
-                // If not down last update, key has just been pressed.
-                if (!oldState.IsKeyDown(Keys.Space))
-                {
-
-                    if(mediumAmmoSelected == true)
-                    {
-                        //The first thing that happens = we need to update the object with the current information i.e
-                        weaponList[1].Update(deltaTime, marbleWheelsPosition, mma);
-                        weaponList[1].shootMarble();
-                        ammo = weaponList[1].newAmmo();
-                        ammoCount -= 2;
-                    }
-
-                    else
-                    {   
-                        weaponList[0].Update(deltaTime, marbleWheelsPosition, bma);
-                        weaponList[0].shootMarble();
-                        ammo = weaponList[0].newAmmo();
-                        ammoCount--;
-                    }
-                    
-                }
-            }
-            
-            oldState = KeyState;
-            spriteDirection *= speed;
-            marbleWheelsPosition += (spriteDirection * deltaTime);
-        }
-
-        /**
-        *
-        *
-        */
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -324,7 +267,7 @@ namespace MarbleWheels
                 spriteBatch.Draw(ammoSackBar, ammoSackBarPosition, Color.White);
                 spriteBatch.Draw(healthBar, healthBarPosition, Color.White);
                 spriteBatch.Draw(scoreBar, scoreBarPosition, Color.White);
-                spriteBatch.DrawString(headerFont, "" + ammoCount, new Vector2(740, 35), Color.Black);
+                spriteBatch.DrawString(headerFont, "" + ammoAmount, new Vector2(740, 35), Color.Black);
                 spriteBatch.DrawString(headerFont, "" + marbleDamage, new Vector2(620, 35), Color.Black);
                 spriteBatch.DrawString(headerFont, "" + score, new Vector2(120, 35), Color.Black);
 

@@ -9,6 +9,7 @@ namespace MarbleWheels
     {
         List<Ammunition> newAmmo();
         void shootMarble();
+        int ammoAmountToTakeOff();
         void Update(float deltaTime, Vector2 marbleWheelsPosition, Texture2D marbleAmmoAppereance);
     }
 }
