@@ -4,9 +4,18 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Media;
+using MarbleWheels.scripts;
 
 namespace MarbleWheels
 {
+    enum InstructionResult
+    {
+        Done,
+        DoneAndCreateAsteroid,
+        Running,
+        RunningAndCreateAsteroid
+    }
+
     public class MarbleWheels : Game
     {
         GraphicsDeviceManager graphics;
@@ -29,10 +38,22 @@ namespace MarbleWheels
                           healthBar, 
                           scoreBar;
 
-        private int gameLogicScriptPC = 0, rndNumberLine1, iLine1, rndNumberLine5, iLine5, ammoAmount = 500, index;
-        private float speed, timeToWaitLine3, timeToWaitLine4, timeToWaitLine8, timeToWaitLine7, deltaTime;
+        private int ammoAmount = 500, index;
+        private float speed, deltaTime;
 
         private Random randomGenerator = new Random();
+        static Random ran = new Random();
+        Instruction astroidSpawnLogic =
+          new Repeat(
+              new For(0, 10, i =>
+                    new Wait(() => i * 0.1f) +
+                    new CreateEnemyObject()) +
+              new Wait(() => ran.Next(1, 5)) +
+              new For(0, 10, i =>
+                    new Wait(() => (float)ran.NextDouble() * 1.0f + 0.2f) +
+                    new CreateEnemyObject()) +
+              new Wait(() => ran.Next(2, 3)));
+
         private List<Entity> enemyObjects = new List<Entity>();
         private List<Entity> ammo = new List<Entity>();
         private List<Weapon<Entity>> weaponList;
@@ -121,123 +142,17 @@ namespace MarbleWheels
                 ammoAmount -= weaponList[index].ammoAmountToTakeOff();
             }
 
-            //Spawn them
-            spawnEnemyObject();
+            switch (astroidSpawnLogic.Execute(deltaTime))
+            {
+                case InstructionResult.DoneAndCreateAsteroid:
+                    enemyObjectCreation();
+                    break;
+                case InstructionResult.RunningAndCreateAsteroid:
+                    enemyObjectCreation();
+                    break;
+            }
 
             base.Update(gameTime);
-        }
-
-        /*
-        * Factory Pattern
-        * An important facet of system design is the manner in which objects are created. Although far more time is 
-        * often spent considering the object model and instance interaction, if this simple design aspect is ignored it will adversely impact the entire system. 
-        * Thus, it is not only important what an object does or what it models, but also in what manner it was created.
-        */
-        private void spawnEnemyObject()
-        {
-            switch (gameLogicScriptPC)
-            {
-                case 0:
-                        if (true)
-                        {
-                            gameLogicScriptPC = 1;
-                            iLine1 = 1;
-                            rndNumberLine1 = randomGenerator.Next(20, 60);
-                        }
-                        break;
-                case 1:
-                        if (iLine1 <= rndNumberLine1)
-                        {
-                            gameLogicScriptPC = 2;
-                        }
-
-                        else
-                        {
-                            gameLogicScriptPC = 4;
-                            timeToWaitLine4 = (float)(randomGenerator.NextDouble() * 2.0 + 5.0);
-                        }
-                        break;
-                case 2:
-                        enemyObjectCreation();
-                        gameLogicScriptPC = 3;
-                        timeToWaitLine3 = (float)(randomGenerator.NextDouble() * 0.2 + 0.1);
-                        break;
-                case 3:
-                        timeToWaitLine3 -= deltaTime;
-
-                        if (timeToWaitLine3 > 0.0f)
-                        {
-                            gameLogicScriptPC = 3;
-                        }
-
-                        else
-                        {
-                            gameLogicScriptPC = 1;
-                            iLine1++;
-                        }
-                        break;
-                case 4:
-                        timeToWaitLine4 -= deltaTime;
-
-                        if (timeToWaitLine4 > 0.0f)
-                        {
-                            gameLogicScriptPC = 4;
-                        }
-
-                         else
-                        {
-                            gameLogicScriptPC = 5;
-                            iLine5 = 1;
-                            rndNumberLine5 = randomGenerator.Next(10, 20);
-                        }
-                        break;
-                case 5:
-                        if (iLine5 <= rndNumberLine5)
-                        {
-                            gameLogicScriptPC = 6;
-                        }
-
-                        else
-                        {
-                            gameLogicScriptPC = 8;
-                            timeToWaitLine8 = (float)(randomGenerator.NextDouble() * 2.0 + 5.0);
-                        }
-                        break;
-                case 6:
-                        enemyObjectCreation();
-                        gameLogicScriptPC = 7;
-                        timeToWaitLine7 = (float)(randomGenerator.NextDouble() * 1.5 + 0.5);
-                        break;
-                case 7:
-                        timeToWaitLine7 -= deltaTime;
-
-                        if (timeToWaitLine7 > 0)
-                        {
-                            gameLogicScriptPC = 7;
-                        }
-
-                        else
-                        {
-                            gameLogicScriptPC = 5;
-                            iLine5++;
-                        }
-                        break;
-                    case 8:
-                        timeToWaitLine8 -= deltaTime;
-
-                        if (timeToWaitLine8 > 0.0f)
-                        {
-                            gameLogicScriptPC = 8;
-                        }
-                        else
-                        {
-                            gameLogicScriptPC = 0;
-                        }
-                        break;
-
-                    default:
-                            break;
-            }
         }
 
         /*

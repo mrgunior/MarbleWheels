@@ -44,6 +44,12 @@
     <Compile Include="Entity.cs" />
     <Compile Include="MediumMarbleAmmo.cs" />
     <Compile Include="BasicMarbleAmmo.cs" />
+    <Compile Include="scripts\CreateEnemyObject.cs" />
+    <Compile Include="scripts\For.cs" />
+    <Compile Include="scripts\Instruction.cs" />
+    <Compile Include="scripts\Repeat.cs" />
+    <Compile Include="scripts\Semicolon.cs" />
+    <Compile Include="scripts\Wait.cs" />
     <Compile Include="Weapon.cs" />
     <Compile Include="MarbleWheels.cs" />
     <Compile Include="Program.cs" />
