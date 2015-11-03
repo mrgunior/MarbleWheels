@@ -8,9 +8,10 @@ namespace MarbleWheels.scripts
     class CreateEnemyObject : Instruction
     {
 
-        public override InstructionResult Execute(float dt)
+        //create enemy object
+        public override InstructionResult Execute(float deltaTime)
         {
-            return InstructionResult.DoneAndCreateAsteroid;
+            return InstructionResult.DoneAndCreateEnemyObject;
         }
 
         public override Instruction Reset()

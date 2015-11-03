@@ -15,19 +15,21 @@ namespace MarbleWheels.scripts
             this.B = B;
         }
 
-        public override InstructionResult Execute(float dt)
+        public override InstructionResult Execute(float deltaTime)
         {
             if (!isADone)
             {
-                var Ares = A.Execute(dt);
+                var Ares = A.Execute(deltaTime);
                 switch (Ares)
                 {
                     case InstructionResult.Done:
                         isADone = true;
                         return InstructionResult.Running;
-                    case InstructionResult.DoneAndCreateAsteroid:
+
+                    case InstructionResult.DoneAndCreateEnemyObject:
                         isADone = true;
-                        return InstructionResult.RunningAndCreateAsteroid;
+
+                        return InstructionResult.RunningAndCreateEnemyObject;
                     default:
                         return Ares;
                 }
@@ -36,13 +38,14 @@ namespace MarbleWheels.scripts
             {
                 if (!isBDone)
                 {
-                    var Bres = B.Execute(dt);
+                    var Bres = B.Execute(deltaTime);
                     switch (Bres)
                     {
                         case InstructionResult.Done:
                             isBDone = true;
                             break;
-                        case InstructionResult.DoneAndCreateAsteroid:
+
+                        case InstructionResult.DoneAndCreateEnemyObject:
                             isBDone = true;
                             break;
                     }
@@ -55,6 +58,7 @@ namespace MarbleWheels.scripts
             }
         }
 
+        //new object
         public override Instruction Reset()
         {
             return new Semicolon(A.Reset(), B.Reset());

@@ -8,13 +8,14 @@ using MarbleWheels.scripts;
 
 namespace MarbleWheels
 {
-    enum InstructionResult
-    {
-        Done,
-        DoneAndCreateAsteroid,
-        Running,
-        RunningAndCreateAsteroid
-    }
+    /*
+    The enum keyword is used to declare an enumeration, a distinct type that consists of a set of named constants called the enumerator list. 
+    Usually it is best to define an enum directly within a namespace so that all classes in the namespace can access it with equal convenience. 
+    However, an enum can also be nested within a class or struct.
+    By default, the first enumerator has the value 0, and the value of each successive enumerator is increased by 1
+    */
+    //0, 1, 2, 3
+    enum InstructionResult { Done, DoneAndCreateEnemyObject, Running, RunningAndCreateEnemyObject }
 
     public class MarbleWheels : Game
     {
@@ -42,24 +43,39 @@ namespace MarbleWheels
         private float speed, deltaTime;
 
         private Random randomGenerator = new Random();
-        static Random ran = new Random();
-        Instruction astroidSpawnLogic =
-          new Repeat(
-              new For(0, 10, i =>
-                    new Wait(() => i * 0.1f) +
-                    new CreateEnemyObject()) +
-              new Wait(() => ran.Next(1, 5)) +
-              new For(0, 10, i =>
-                    new Wait(() => (float)ran.NextDouble() * 1.0f + 0.2f) +
-                    new CreateEnemyObject()) +
-              new Wait(() => ran.Next(2, 3)));
 
+        static Random random = new Random();
+        //child classes(repeat, for, wait, createEnemyObject) derived from parent class(Instruction)
+        Instruction enemyObjectSpawnLogic =
+          new Repeat(
+                //start, end, input => expression
+                new For(0, 10, i =>   
+                        //Func < float > getTimeToWait
+                        new Wait(() => i * 0.1f) +
+                        new CreateEnemyObject()
+                    ) +
+                new Wait(() => random.Next(1, 5)) +
+                //start, end, input => expression
+                new For(0, 10, i =>
+                        //Func < float > getTimeToWait
+                        //Returns a random floating - point number that is greater than or equal to 0.0, and less than 1.0.
+                        new Wait(() => (float)random.NextDouble() * 1.0f + 0.2f) +
+                        new CreateEnemyObject()
+                    ) +
+                //Func < float > getTimeToWait
+                new Wait(() => random.Next(2, 3))
+              );
+
+        //generic List collection
+        //generic collection List<Entity>, which is referred to as List of Entity
         private List<Entity> enemyObjects = new List<Entity>();
         private List<Entity> ammo = new List<Entity>();
-        private List<Weapon<Entity>> weaponList;
-        private KeyboardController keyboardInput = new KeyboardController();
         private List<Texture2D> textureList;
 
+        //Each weapon is unique in texture and power. Nested list
+        private List<Weapon<Entity>> weaponList;
+
+        private KeyboardController keyboardInput = new KeyboardController();
         private int score = 0, marbleDamage = 100;
         private bool takeOut;
 
@@ -142,12 +158,14 @@ namespace MarbleWheels
                 ammoAmount -= weaponList[index].ammoAmountToTakeOff();
             }
 
-            switch (astroidSpawnLogic.Execute(deltaTime))
+            //constructor, Execute in order
+            switch (enemyObjectSpawnLogic.Execute(deltaTime))
             {
-                case InstructionResult.DoneAndCreateAsteroid:
+                case InstructionResult.DoneAndCreateEnemyObject:
                     enemyObjectCreation();
                     break;
-                case InstructionResult.RunningAndCreateAsteroid:
+
+                case InstructionResult.RunningAndCreateEnemyObject:
                     enemyObjectCreation();
                     break;
             }

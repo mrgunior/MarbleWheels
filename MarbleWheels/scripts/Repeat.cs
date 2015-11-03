@@ -13,24 +13,29 @@ namespace MarbleWheels.scripts
             this.body = body;
         }
 
-        public override InstructionResult Execute(float dt)
+        public override InstructionResult Execute(float deltaTime)
         {
-            switch (body.Execute(dt))
+            switch (body.Execute(deltaTime))
             {
                 case InstructionResult.Done:
                     body = body.Reset();
                     return InstructionResult.Running;
-                case InstructionResult.DoneAndCreateAsteroid:
+
+                case InstructionResult.DoneAndCreateEnemyObject:
                     body = body.Reset();
-                    return InstructionResult.RunningAndCreateAsteroid;
+                    return InstructionResult.RunningAndCreateEnemyObject;
+
                 case InstructionResult.Running:
                     return InstructionResult.Running;
-                case InstructionResult.RunningAndCreateAsteroid:
-                    return InstructionResult.RunningAndCreateAsteroid;
+
+                case InstructionResult.RunningAndCreateEnemyObject:
+                    return InstructionResult.RunningAndCreateEnemyObject;
             }
+
             return InstructionResult.Running;
         }
 
+        //new object
         public override Instruction Reset()
         {
             return new Repeat(body.Reset());
